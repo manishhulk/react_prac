@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react'
 
 const UseRef = () => {
   const name = useRef(null);
-  const [status, setStatus] = useState(true)
+  const [status, setStatus] = useState(false)
 
   const submitData = (e) => {
     e.preventDefault();
     const nameData = name.current.value;
-    nameData != "" ? setStatus(false) : alert('enter value');
+    nameData !== "" ? setStatus(true) : alert('enter value');
   }
 
   return (
@@ -16,7 +16,7 @@ const UseRef = () => {
         <input type="text" ref={name} />
         <button>Submit</button>
       </form>
-      {status && `<div>This is the input value : ${name.current.value}</div>`}
+      {status && <div>This is the input value : {name.current.value}</div>}
     </>
   )
 }
