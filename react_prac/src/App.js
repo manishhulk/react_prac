@@ -1,14 +1,15 @@
 import './App.css';
+import ReactRedux from './components/ReactRedux';
 // import ComA from './components/UseContext/ComA';
 // import Home from './components/ReactLocation/Home';
 // import Nav from './components/ReactLocation/Nav';
 // import ReactToastify from './components/ReactLocation/ReactToastify';
-import ToDoList from './components/ToDoList';
 // import UseReducer from './components/UseEffects/UseReducer';
 // import UseRef from './components/UseEffects/UseRef';
 // import CustomForm from './components/CustomForm';
 // import UseEffects from './components/UseEffects/UseEffects';
 // import UseEffects2 from './components/UseEffects/UseEffects2';
+// import ToDoList from './components/ToDoList';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       {/* <Nav /> */}
       {/* <Home /> */}
       {/* <ReactToastify /> */}
-      <ToDoList />
+      {/* <ToDoList /> */}
+      <ReactRedux />
     </div>
   );
 }
