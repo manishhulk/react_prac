@@ -1,12 +1,23 @@
 import React from 'react'
-import {useRouter} from 'next/router'
 
-const Post = () => {
-  const router = useRouter();
-  const { slug } = router.query;
+const Post = ({blogData}) => {
+  const {title, content} = blogData;
   return (
-    <div>This is the page handle : {slug}</div>
+    <>
+      <h1>{title}</h1>
+      <p dangerouslySetInnerHTML={{__html: content}}></p>
+    </>
   )
+}
+
+export async function getServerSideProps(context) {
+  var { slug } = context.query
+  var data = await fetch(`http://localhost:3000/api/getblog?slug=${slug}`);
+  var blogData = await data.json();
+
+  return {
+    props: {blogData}
+  }
 }
 
 export default Post
