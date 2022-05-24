@@ -1,24 +1,38 @@
 import {useState} from 'react'
 import styles from '../styles/Contact.module.css'
 
-const submitForm = (e) => {
-  e.preventDefault();
-  console.log(fname.value, email.value, phone.value, desc.value);
-  const data = {fname, email, phone, desc};
-  console.table(data)
-}
-
 const Contact = () => {
   const [fname, setfname] = useState('');
   const [email, setemail] = useState('');
   const [phone, setphone] = useState('');
   const [desc, setdesc] = useState('');
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const contactData = {fname, email, phone, desc};
+    console.log(contactData);
+    fetch('http://localhost:3000/api/postcontact', {
+      method: 'POST',
+      body: JSON.stringify(contactData),
+      headers: {'Content-Type': 'application/json'}
+    }).then(res => res.text())
+    .then(data => {
+      console.log("success", data);
+    }).catch(err => {
+      console.log("error", err);
+    })
+    setfname('');
+    setemail('');
+    setphone('');
+    setdesc('');
+  }
+
   return (
     <div className={styles.container}>
       <form onSubmit={submitForm}>
 
         <label htmlFor="fname">Name</label>
-        <input type="text" value={fname} onChange={(e) => setfname(e.value)} id="fname" name="fname" placeholder="Your name.." required />
+        <input type="text" value={fname} onChange={(e) => setfname(e.target.value)} id="fname" name="fname" placeholder="Your name.." required />
 
         <label htmlFor="lname">Email</label>
         <input type="email" value={email} onChange={(e) => setemail(e.target.value)} id="email" name="email" placeholder="Your last name.." required />
@@ -33,6 +47,7 @@ const Contact = () => {
 
       </form>
     </div>
+    
   )
 }
 
